@@ -21,8 +21,7 @@ export class CocktailsService {
         try {
 
             let name = createCocktailRequest.name;
-            let instructions = createCocktailRequest.instructions || ''
-            console.log('this is the tatatatat', instructions);
+            let instructions = createCocktailRequest.instructions || '';
             
             await this.cocktailsRepository.save({
                 id: uuid,
@@ -64,6 +63,25 @@ export class CocktailsService {
         } catch (error) {
             console.log(error.message);
             throw new Error('Failed to create registers');
+        }
+    }
+
+    async findByName(name: string): Promise<Cocktails | null> {
+        try {
+            return await this.cocktailsRepository.findOne({ where: { name } });
+        } catch (error) {
+            console.log(error.message);
+            throw new Error('Failed to find cocktails');
+        }
+    }
+
+    async findAllCocktails(): Promise<Cocktails[]> {
+        try {
+            const cocktails = await this.cocktailsRepository.find();
+            return cocktails;
+        } catch (error) {
+            console.log(error.message);
+            throw new Error('Failed to fetch cocktails');
         }
     }
 
