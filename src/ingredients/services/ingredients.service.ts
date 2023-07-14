@@ -16,13 +16,13 @@ export class IngredientsService {
 
     async findAllIngredients(): Promise<Ingredients[]> {
         try {
-          const ingredients = await this.ingredientsRepository.find();
-          return ingredients;
+            const ingredients = await this.ingredientsRepository.find();
+            return ingredients;
         } catch (error) {
-          console.log(error.message);
-          throw new Error('Failed to fetch ingredients');
+            console.log(error.message);
+            throw new Error('Failed to fetch ingredients');
         }
-      }
+    }
 
     async findByName(name: string): Promise<Ingredients | null> {
         try {

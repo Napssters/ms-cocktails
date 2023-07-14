@@ -1,25 +1,25 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'; 
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
-export class Cocktails { 
-   @PrimaryGeneratedColumn('uuid')
-   id: string; 
-  
-   @Column() 
-   name: string;
+export class Cocktails {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-   @Column() 
-   instruction: string;  
+  @Column()
+  name: string;
 
-   @Column() 
-   aditionalNotes: string;  
-  
-   @Column() 
-   isDeleted: boolean; 
-  
-   @Column({ type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP' }) 
-   createdAt: Date; 
+  @Column()
+  instruction: string;
 
-   @Column({ type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP' }) 
-   updatedAt: Date; 
- }
+  @Column()
+  aditionalNotes: string;
+
+  @Column()
+  isDeleted: boolean;
+
+  @Column({ type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
+
+  @Column({ type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP' })
+  updatedAt: Date;
+}
