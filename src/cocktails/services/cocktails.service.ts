@@ -21,33 +21,45 @@ export class CocktailsService {
         try {
 
             let name = createCocktailRequest.name;
-            let cocktailId = uuid;
-
+            let instructions = createCocktailRequest.instructions || ''
+            console.log('this is the tatatatat', instructions);
+            
             await this.cocktailsRepository.save({
-                id: cocktailId,
+                id: uuid,
                 name: name,
-                instructions: createCocktailRequest.instructions,
+                instructions: instructions,
                 aditionalNotes: createCocktailRequest.additionalNotes,
                 isDeleted: false,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             });
 
+            const cocktail = await this.cocktailsRepository.findOne({ where: { name } });
+
+            if (!cocktail) {
+                throw new Error('Entity not found');
+            }
+
             for (const ingredient of createCocktailRequest.ingredients) {
-                await this.createRegister(cocktailId, ingredient.name);
+                await this.createRegister(parseInt(cocktail.id), ingredient.name);
             }
 
             return { message: 'Cocktail create successfully' };
 
         } catch (error) {
             console.log(error.message);
-            throw new Error('Failed to create ingredient');
+            throw new Error('Failed to create cocktail');
         }
     }
 
     async createRegister(cocktailId: number, ingredientName: string): Promise<void> {
         try {
             const ingredient = await this.ingredientsService.findByName(ingredientName);
+
+            if (!ingredient) {
+                throw new Error('ingredient is empty');
+            }
+
             await this.preparedCocktailService.createRegister(cocktailId, parseInt(ingredient.id));
         } catch (error) {
             console.log(error.message);
