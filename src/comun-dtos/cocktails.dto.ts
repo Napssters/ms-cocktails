@@ -1,7 +1,7 @@
 import { IsArray, IsString } from "class-validator";
-import { IngredientDTO } from "../ingredientes.dto";
+import { IngredientDTO } from "./ingredientes.dto";
 
-export class CreateCocktailRequestDTO {
+export class CocktailsDTO {
     
     @IsString()
     name: string;

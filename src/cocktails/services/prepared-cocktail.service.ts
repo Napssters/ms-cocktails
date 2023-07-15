@@ -16,7 +16,7 @@ export class PreparedCocktailService {
             return await this.cocktailsRepository.save({
                 id: uuid,
                 cocktailId: cocktailId,
-                ingredienId: ingredienId
+                ingredientId: ingredienId
             });
         } catch (error) {
             console.log(error.message);
@@ -39,7 +39,7 @@ export class PreparedCocktailService {
             if (optionFilter == 1) {
                 return await this.cocktailsRepository.find({ where: { cocktailId: productId } });
             } else {
-                return await this.cocktailsRepository.find({ where: { ingredienId: productId } });
+                return await this.cocktailsRepository.find({ where: { ingredientId: productId } });
             }
         } catch (error) {
             console.log(error.message);
